@@ -21,6 +21,7 @@ import { TarjetaPage } from '../pages/tarjeta/tarjeta';
 import { ContactoPage } from '../pages/contacto/contacto';
 import { BalancePage } from '../pages/balance/balance';
 import { DepositoPage } from '../pages/deposito/deposito';
+import { InversionesPage } from '../pages/inversiones/inversiones';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { DepositoPage } from '../pages/deposito/deposito';
     MovimientosPage,
     TarjetaPage,
     DepositoPage,
-    ContactoPage
+    ContactoPage,
+    InversionesPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { DepositoPage } from '../pages/deposito/deposito';
     MovimientosPage,
     TarjetaPage,
     DepositoPage,
-    ContactoPage
+    ContactoPage,
+    InversionesPage
   ],
   providers: [
     StatusBar,

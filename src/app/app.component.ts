@@ -4,7 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { InversionesPage } from '../pages/inversiones/inversiones';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -18,11 +19,12 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Inicio', component: HomePage },
-      { title: 'List', component: ListPage },
+      { title: 'Compra / Venta de Coches', component: HomePage },
+      { title: 'Inmobiliarias', component: InversionesPage },
+      { title: 'Compras Off-Store', component: InversionesPage },
+      { title: 'Movimientos', component: InversionesPage }
     ];
 
   }
