@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DetallesPage } from '../detalles/detalles';
 
 /**
- * Generated class for the InversionesPage page.
+ * Generated class for the DetallesPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,21 +10,16 @@ import { DetallesPage } from '../detalles/detalles';
 
 @IonicPage()
 @Component({
-  selector: 'page-inversiones',
-  templateUrl: 'inversiones.html',
+  selector: 'page-detalles',
+  templateUrl: 'detalles.html',
 })
-export class InversionesPage {
+export class DetallesPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad InversionesPage');
-  }
-
-  abrirDetalles()
-  {
-    this.navCtrl.push(DetallesPage);
+    console.log('ionViewDidLoad DetallesPage');
   }
 
 }

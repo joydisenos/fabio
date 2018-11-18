@@ -1,15 +1,16 @@
 <ion-menu [content]="content">
   <ion-header>
-    <ion-toolbar style="color:#FFF" padding color="primary">
-      <p>
-        Bienvenido, Usuario
-      </p>
-      <h4 >Balance: 1000€</h4>
+    <ion-toolbar no-padding color="dark">
+      <img src="assets/imgs/fondo.jpg" alt="">
+      <div padding>
+          <h4 style="color:#D4AF37">Pablo Garcés</h4>
+          <h4 style="color:#D4AF37">Balance: 1000€</h4>
+      </div>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
-    <ion-list>
+  <ion-content class="fondo-dark">
+    <ion-list class="lista-dark" no-lines>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
