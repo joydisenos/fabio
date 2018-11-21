@@ -5,9 +5,9 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar class="principal">
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu" color="oro"></ion-icon>
     </button>
     <div class="logo">
         <img src="assets/imgs/logof.png" alt="">
@@ -15,7 +15,7 @@
 
     <ion-buttons start>
       <button ion-button icon-only>
-        <ion-icon name="contact"></ion-icon>
+        <ion-icon name="contact" color="oro"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -23,25 +23,39 @@
 </ion-header>
 
 
-<ion-content padding class="fondo-dark">
+<ion-content no-padding>
 
-  <h3 padding>Balance: 1000€</h3>
+    <ion-card class="principal" padding>
+      
 
-  <ion-list no-padding class="lista-dark">
+        <h1>
+         1000€
+        </h1>
+        <div class="mini">
+          Balance total
+        </div>
+   </ion-card>
+
+  <ion-list no-padding>
     <button ion-item>
-      <span style="color:green">+100€</span> Local 200mts2 <span style="font-size:small">07/9/2018
+      <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 100€</span> Local 200mts2 <span style="font-size:small;float: right" end>07/9/2018
 </span>    </button>
+
+<button ion-item>
+    <span style="color:rgb(255, 0, 0)">   <ion-icon name="remove-circle"></ion-icon> 300€</span> Local 200mts2 <span style="font-size:small;float: right" end>07/9/2018
+</span>    </button>
+
     <button ion-item>
-        <span style="color:green">+70€</span> Local 200mts2 <span style="font-size:small">18/10/2018</span>
+        <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 70€</span> Local 200mts2 <span style="font-size:small;float: right" end>18/10/2018</span>
     </button>
     <button ion-item>
-      <span style="color:green">+150€</span> Local 200mts2 <span style="font-size:small">21/11/2018</span>
+      <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 150€</span> Local 200mts2 <span style="font-size:small;float: right" end>21/11/2018</span>
     </button>
     <button ion-item>
-      <span style="color:green">+200€</span> Propiedad 2 Plantas <span style="font-size:small">30/11/2018</span>
+      <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 200€</span> Propiedad 2 Plantas <span style="font-size:small;float: right" end>30/11/2018</span>
     </button>
     <button ion-item>
-      <span style="color:green">+100€</span> Propiedad 2 Plantas <span style="font-size:small">01/12/2018</span>
+      <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 100€</span> Propiedad 2 Plantas <span style="font-size:small;float: right" end>01/12/2018</span>
     </button>
   </ion-list>
 

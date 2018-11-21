@@ -5,9 +5,9 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar class="principal">
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu" color="oro"></ion-icon>
     </button>
     
     <div class="logo">
@@ -16,90 +16,81 @@
 
     <ion-buttons start>
       <button ion-button icon-only>
-        <ion-icon name="contact"></ion-icon>
+        <ion-icon name="contact" color="oro"></ion-icon>
       </button>
     </ion-buttons>
 
   </ion-navbar>
-
-  <div padding>
-      <ion-segment [(ngModel)]="compras">
-        <ion-segment-button value="coches">
-          Coches
-        </ion-segment-button>
-        <ion-segment-button value="inmobiliarias">
-          Inmobiliarias
-        </ion-segment-button>
-        <ion-segment-button value="off">
-            Off-Store
-        </ion-segment-button>
-      </ion-segment>
-    </div>
 </ion-header>
 
 
 <ion-content padding class="fondo-dark">
-<div [ngSwitch]="compras">
-  <ion-list class="lista-dark" *ngSwitchCase="'coches'">
+<div>
+  <ion-list class="lista-dark" no-lines>
     
-    <button ion-item (click)="abrirDetalles()">
-        <ion-icon name="logo-euro" start></ion-icon>
+    <button ion-item  >
+        <ion-icon name="logo-euro" color="oro" start></ion-icon>
         Compra de Vehículo Ferrari 250 GTO
+        <span class="mini" item-end>4.000€</span>
       </button>
       
     
-      <button ion-item (click)="abrirDetalles()">
-          <ion-icon name="logo-euro" start></ion-icon>
+      <button ion-item  >
+          <ion-icon name="logo-euro" color="oro" start></ion-icon>
         Porche Spyder
+        <span class="mini" item-end>4.000€</span>
       </button>
-      <button ion-item (click)="abrirDetalles()">
-          <ion-icon name="logo-euro" start></ion-icon>
+      <button ion-item  >
+          <ion-icon name="logo-euro" color="oro" start></ion-icon>
         Nissan 350z
+        <span class="mini" item-end>4.000€</span>
       </button>
       
-  </ion-list>
-
-  <ion-list class="lista-dark" *ngSwitchCase="'inmobiliarias'">
-      <button ion-item (click)="abrirDetalles()">
-        <ion-icon name="logo-euro" start></ion-icon>
+      <button ion-item  >
+        <ion-icon name="logo-euro" color="oro" start></ion-icon>
         Propiedad 2 Plantas
+        <span class="mini" item-end>4.000€</span>
       </button>
      
-      <button ion-item (click)="abrirDetalles()">
-          <ion-icon name="logo-euro" start></ion-icon>
+      <button ion-item  >
+          <ion-icon name="logo-euro" color="oro" start></ion-icon>
         5000 mts2 Terreno
+        <span class="mini" item-end>4.000€</span>
       </button>
 
-      <button ion-item (click)="abrirDetalles()">
-          <ion-icon name="logo-euro" start></ion-icon>
+      <button ion-item  >
+          <ion-icon name="logo-euro" color="oro" start></ion-icon>
         Edificio de 5 pisos
+        <span class="mini" item-end>4.000€</span>
       </button>
 
-      <button ion-item (click)="abrirDetalles()">
-          <ion-icon name="logo-euro" start></ion-icon>
+      <button ion-item  >
+          <ion-icon name="logo-euro" color="oro" start></ion-icon>
         Conjunto Residencial Pino
+        <span class="mini" item-end>4.000€</span>
       </button>
      
-       
-    </ion-list>
-
-    <ion-list class="lista-dark" *ngSwitchCase="'off'">
+  
         
-        <button ion-item (click)="abrirDetalles()">
-            <ion-icon name="logo-euro" start></ion-icon>
-            Compra de Vehículo Ferrari 250 GTO
+        <button ion-item  >
+            <ion-icon name="logo-euro" color="oro" start></ion-icon>
+            Compra de Vehículo Ferrari 250 
+            <span class="mini" item-end>4.000€</span>
           </button>
-          <button ion-item (click)="abrirDetalles()">
-              <ion-icon name="logo-euro" start></ion-icon>
+          <button ion-item  >
+              <ion-icon name="logo-euro" color="oro" start></ion-icon>
             Compra de Acciones Lays
+            <span class="mini" item-end>4.000€</span>
           </button>
-          <button ion-item (click)="abrirDetalles()">
-              <ion-icon name="logo-euro" start></ion-icon>
+          <button ion-item  >
+              <ion-icon name="logo-euro" color="oro" start></ion-icon>
             Compra de Franquicia Arturo's
+            <span class="mini" item-end>4.000€</span>
           </button>
-          <button ion-item (click)="abrirDetalles()">
-              <ion-icon name="logo-euro" start></ion-icon>
+          <button ion-item  >
+              <ion-icon name="logo-euro" color="oro" start></ion-icon>
             Compra Cuadros Coleccionables
+            <span class="mini" item-end>4.000€</span>
           </button>
           
       </ion-list>

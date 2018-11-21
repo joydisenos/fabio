@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar class="principal">
     <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu" color="oro"></ion-icon>
     </button>
 
     <div class="logo">
@@ -10,75 +10,297 @@
 
     <ion-buttons start>
       <button ion-button icon-only>
-        <ion-icon name="contact"></ion-icon>
+        <ion-icon name="contact" color="oro"></ion-icon>
       </button>
     </ion-buttons>
 
   </ion-navbar>
 </ion-header>
 
-<ion-content class="fondo-dark">
+<ion-content>
 
-  <ion-card color="oro" (click)="abrirDetalles()">
-    <ion-card-header>
-      Compra Nissan 350z
-    </ion-card-header>
-  
-    <ion-card-content>
-      Fecha e inversión: 10/05/2017, 300% valor aumentado, ganancia 200%, importe inicial: 500.000€
-    </ion-card-content>
-    
-      <ion-row padding>
-        <ion-col>
-          14-11-2018
+  <ion-card class="principal" padding>
+      
+
+       <h1>
+        1000€
+       </h1>
+       <div class="mini">
+         Balance total
+       </div>
+  </ion-card>
+  <div id="container" style="display: block;"	></div>
+
+  <ion-list no-lines>
+    <button ion-item  >
+
+      <ion-row>
+        <ion-col col-2>
+ 
+              <ion-icon name="car" item-start color="oro"></ion-icon>
+         
         </ion-col>
-        <ion-col>
-          disponible
+
+        <ion-col >
+            Compra Nissan 350z
+            <br>
+
+      <div class="mini">
+        4.000€
+      </div>
         </ion-col>
       </ion-row>
-    
-  </ion-card>
-
-  <ion-card color="oro" (click)="abrirDetalles()">
-      <ion-card-header>
-        Edificio de 4 Plantas
-      </ion-card-header>
-    
-      <ion-card-content>
-          Fecha e inversión: 10/08/2016, 600% valor aumentado, ganancia 500%, importe inicial: 1.760.000€
-        
-      </ion-card-content>
       
-        <ion-row padding>
-          <ion-col>
-            14-11-2018
+      
+     
+
+      <span item-end class="mini">
+        14-11-2018
+      </span>
+
+      
+
+      
+    </button>
+
+
+    <button ion-item  >
+
+        <ion-row>
+          <ion-col col-2>
+   
+                <ion-icon name="car" item-start color="oro"></ion-icon>
+           
           </ion-col>
-          <ion-col>
-            en venta
+  
+          <ion-col >
+              Compra Nissan 350z
+              <br>
+  
+        <div class="mini">
+          4.000€
+        </div>
           </ion-col>
         </ion-row>
-      
-    </ion-card>
-
-    <ion-card color="oro" (click)="abrirDetalles()">
-        <ion-card-header>
-          Compra de Acciones Lays's
-        </ion-card-header>
-      
-        <ion-card-content>
-            Fecha e inversión: 07/09/2018, 10% valor aumentado, ganancia 8,5%, importe inicial: 800.000€
-          
-        </ion-card-content>
         
-          <ion-row padding>
-            <ion-col>
-              20-11-2018
+        
+       
+  
+        <span item-end class="mini">
+          14-11-2018
+        </span>
+  
+        
+  
+        
+      </button>
+
+
+
+      <button ion-item  >
+
+          <ion-row>
+            <ion-col col-2>
+     
+                  <ion-icon name="car" item-start color="oro"></ion-icon>
+             
             </ion-col>
-            <ion-col>
-              activo
+    
+            <ion-col >
+                Compra Yate
+                <br>
+    
+          <div class="mini">
+            12.000€
+          </div>
             </ion-col>
           </ion-row>
+          
+          
+         
+    
+          <span item-end class="mini">
+            14-11-2018
+          </span>
+    
+          
+    
+          
+        </button>
+
+
+
+
+        <button ion-item  >
+
+            <ion-row>
+              <ion-col col-2>
+       
+                    <ion-icon name="bulb" item-start color="oro"></ion-icon>
+               
+              </ion-col>
+      
+              <ion-col >
+                  Accciones Lay's
+                  <br>
+      
+            <div class="mini">
+              9.000€
+            </div>
+              </ion-col>
+            </ion-row>
+            
+            
+           
+      
+            <span item-end class="mini">
+              14-11-2018
+            </span>
+      
+            
+      
+            
+          </button>
+
+
+
+
+          <button ion-item  >
+
+              <ion-row>
+                <ion-col col-2>
+         
+                      <ion-icon name="alert" item-start color="oro"></ion-icon>
+                 
+                </ion-col>
         
-      </ion-card>
+                <ion-col >
+                    Compra Casa de 2 Plantas
+                    <br>
+        
+              <div class="mini">
+                123.000€
+              </div>
+                </ion-col>
+              </ion-row>
+              
+              
+             
+        
+              <span item-end class="mini">
+                14-11-2018
+              </span>
+        
+              
+        
+              
+            </button>
+
+
+
+
+            <button ion-item  >
+
+                <ion-row>
+                  <ion-col col-2>
+           
+                        <ion-icon name="car" item-start color="oro"></ion-icon>
+                   
+                  </ion-col>
+          
+                  <ion-col >
+                      Compra Ferrari
+                      <br>
+          
+                <div class="mini">
+                  4.000€
+                </div>
+                  </ion-col>
+                </ion-row>
+                
+                
+               
+          
+                <span item-end class="mini">
+                  14-11-2018
+                </span>
+          
+                
+          
+                
+              </button>
+
+
+
+
+              <button ion-item  >
+
+                  <ion-row>
+                    <ion-col col-2>
+             
+                          <ion-icon name="bulb" item-start color="oro"></ion-icon>
+                     
+                    </ion-col>
+            
+                    <ion-col >
+                        Compra Local
+                        <br>
+            
+                  <div class="mini">
+                    4.000€
+                  </div>
+                    </ion-col>
+                  </ion-row>
+                  
+                  
+                 
+            
+                  <span item-end class="mini">
+                    14-11-2018
+                  </span>
+            
+                  
+            
+                  
+                </button>
+
+
+
+                <button ion-item  >
+
+                    <ion-row>
+                      <ion-col col-2>
+               
+                            <ion-icon name="alert" item-start color="oro"></ion-icon>
+                       
+                      </ion-col>
+              
+                      <ion-col >
+                            Compra Terreno 200 mts2
+                          <br>
+              
+                    <div class="mini">
+                      45.000€
+                    </div>
+                      </ion-col>
+                    </ion-row>
+                    
+                    
+                   
+              
+                    <span item-end class="mini">
+                      1-11-2018
+                    </span>
+              
+                    
+              
+                    
+                  </button>
+    
+
+
+  </ion-list>
+  
+
 
 </ion-content>

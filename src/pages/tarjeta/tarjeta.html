@@ -1,28 +1,56 @@
-<!--
-  Generated template for the TarjetaPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-
-    </ion-title>
-
-    <ion-buttons start>
-      <button ion-button icon-only>
-        <ion-icon name="contact"></ion-icon>
+    <ion-navbar class="principal">
+      <button ion-button menuToggle>
+        <ion-icon name="menu" color="oro"></ion-icon>
       </button>
-    </ion-buttons>
+  
+      <div class="logo">
+        <img src="assets/imgs/logof.png" alt="">
+      </div>
+  
+      <ion-buttons start>
+        <button ion-button icon-only>
+          <ion-icon name="contact" color="oro"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+    </ion-navbar>
+  </ion-header>
 
-  </ion-navbar>
-</ion-header>
 
+<ion-content>
+    <ion-card class="principal" padding>
+      
+        <h1>
+         Registrar Tarjeta
+        </h1>
+        
+   </ion-card>
+    <ion-list padding>
 
-<ion-content padding>
+        <ion-item>
+          <ion-label floating>Nombre y Apellido</ion-label>
+          <ion-input type="text" value=""></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label floating>Número de Cuenta Principal</ion-label>
+          <ion-input type="number"></ion-input>
+        </ion-item>
 
+        <ion-item>
+            <ion-label floating>Número de Tarjeta</ion-label>
+          <ion-input type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>Dirección</ion-label>
+            <ion-input type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <button ion-button block>Guardar</button>
+        </ion-item>
+      
+      </ion-list>
 </ion-content>
