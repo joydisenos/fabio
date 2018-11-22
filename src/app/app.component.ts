@@ -7,6 +7,8 @@ import { HomePage } from '../pages/home/home';
 import { InversionesPage } from '../pages/inversiones/inversiones';
 import { MovimientosPage } from '../pages/movimientos/movimientos';
 import { TarjetaPage } from '../pages/tarjeta/tarjeta';
+import { LoginPage } from '../pages/login/login';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Component({
@@ -15,11 +17,14 @@ import { TarjetaPage } from '../pages/tarjeta/tarjeta';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(private afAuth: AngularFireAuth,
+              public platform: Platform,
+              public statusBar: StatusBar, 
+              public splashScreen: SplashScreen) {
     this.initializeApp();
     // used for an example of ngFor and navigation
     this.pages = [
@@ -45,5 +50,14 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  logOut()
+  {
+    return this.afAuth.auth.signOut().
+    then(() =>
+    {
+      this.nav.setRoot(LoginPage);
+    });
   }
 }
