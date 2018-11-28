@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-navbar class="principal">
+      
+  
+      <div class="logo">
+        <img src="assets/imgs/logof.png" alt="">
+      </div>
+  
+      <ion-buttons start>
+        <button ion-button icon-only>
+          <ion-icon name="contact" color="oro"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+
+  <div class="center">
+    <h3 style="color: #D4AF37">Modificar {{inversion.nombre}}</h3>
+  </div>
+
+    <ion-list no-lines>
+        <ion-item>
+            <ion-label floating>Nombre</ion-label>
+            <ion-input
+              [(ngModel)]="inversion.nombre"
+              type="text"
+              required
+            >
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label floating>Descripción</ion-label>
+              <ion-input
+                [(ngModel)]="inversion.descripcion"
+                type="text"
+                required
+              >
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Cantidad de Inversión</ion-label>
+                <ion-input
+                  [(ngModel)]="inversion.inversion"
+                  type="number"
+                  required
+                >
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label floating>Fecha de Inversión</ion-label>
+                  <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="inversion.fecha"></ion-datetime>
+                </ion-item>
+
+                <ion-item>
+                  <button ion-button (click)="actualizarInversion()">
+                      Actualizar
+                  </button>
+                </ion-item>
+
+    </ion-list>
+
+</ion-content>

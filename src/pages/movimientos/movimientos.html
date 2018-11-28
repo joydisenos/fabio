@@ -14,7 +14,7 @@
       </div>
 
     <ion-buttons start>
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="abrirChat()">
         <ion-icon name="contact" color="oro"></ion-icon>
       </button>
     </ion-buttons>
@@ -29,7 +29,7 @@
       
 
         <h1>
-         1000€
+         {{perfil.disponible}}€
         </h1>
         <div class="mini">
           Balance total
@@ -37,26 +37,15 @@
    </ion-card>
 
   <ion-list no-padding>
-    <button ion-item>
-      <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 100€</span> Local 200mts2 <span style="font-size:small;float: right" end>07/9/2018
-</span>    </button>
+      <ion-item *ngFor="let movimiento of movimientos | async">
+          <span style="color:rgb(0, 255, 0)" *ngIf=" movimiento.tipo == 'abono' ">   <ion-icon name="add-circle"></ion-icon> {{movimiento.cantidad}}€</span>
 
-<button ion-item>
-    <span style="color:rgb(255, 0, 0)">   <ion-icon name="remove-circle"></ion-icon> 300€</span> Local 200mts2 <span style="font-size:small;float: right" end>07/9/2018
-</span>    </button>
+          <span style="color:rgb(255, 0, 0)"  *ngIf=" movimiento.tipo == 'retiro' ">   <ion-icon name="remove-circle"></ion-icon> {{movimiento.cantidad}}€</span>
 
-    <button ion-item>
-        <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 70€</span> Local 200mts2 <span style="font-size:small;float: right" end>18/10/2018</span>
-    </button>
-    <button ion-item>
-      <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 150€</span> Local 200mts2 <span style="font-size:small;float: right" end>21/11/2018</span>
-    </button>
-    <button ion-item>
-      <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 200€</span> Propiedad 2 Plantas <span style="font-size:small;float: right" end>30/11/2018</span>
-    </button>
-    <button ion-item>
-      <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> 100€</span> Propiedad 2 Plantas <span style="font-size:small;float: right" end>01/12/2018</span>
-    </button>
+           {{movimiento.concepto}} <span style="font-size:small;float: right" end>{{movimiento.estatus}}
+    </span>    </ion-item>
+    
+  
   </ion-list>
 
 </ion-content>

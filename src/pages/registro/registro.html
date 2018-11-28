@@ -16,25 +16,44 @@
     </ion-navbar>
   </ion-header>
 
-
 <ion-content padding>
 
     <ion-list>
 
         <ion-item>
-          <ion-label floating>Username</ion-label>
-          <ion-input type="text"></ion-input>
+            <ion-label floating>Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="user.nombre" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label floating>Apellido</ion-label>
+              <ion-input type="text" [(ngModel)]="user.apellido" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Fecha de Nacimiento</ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="user.fecha" required></ion-datetime>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label floating>Domicilio</ion-label>
+                  <ion-input type="text" [(ngModel)]="user.domicilio" required></ion-input>
+                </ion-item>
+
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="email" [(ngModel)]="user.email" required></ion-input>
         </ion-item>
       
         <ion-item>
           <ion-label floating>Password</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input type="password" [(ngModel)]="user.password" required></ion-input>
         </ion-item>
 
         
       
       </ion-list>
 
-        <button color="secondary" ion-button (click)="registrar()">Registrar</button>
+        <button color="secondary" ion-button (click)="registro()">Registrar</button>
 
 </ion-content>

@@ -9,7 +9,7 @@
       </div>
   
       <ion-buttons start>
-        <button ion-button icon-only>
+        <button ion-button icon-only (click)="abrirChat()">
           <ion-icon name="contact" color="oro"></ion-icon>
         </button>
       </ion-buttons>
@@ -30,26 +30,26 @@
 
         <ion-item>
           <ion-label floating>Nombre y Apellido</ion-label>
-          <ion-input type="text" value=""></ion-input>
+          <ion-input type="text" [(ngModel)]="cuenta.nombre"></ion-input>
         </ion-item>
       
         <ion-item>
           <ion-label floating>Número de Cuenta Principal</ion-label>
-          <ion-input type="number"></ion-input>
+          <ion-input type="number" [(ngModel)]="cuenta.numero"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Número de Tarjeta</ion-label>
-          <ion-input type="number"></ion-input>
+          <ion-input type="number" [(ngModel)]="cuenta.tarjeta"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label floating>Dirección</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]="cuenta.direccion"></ion-input>
         </ion-item>
 
         <ion-item>
-            <button ion-button block>Guardar</button>
+            <button ion-button block (click)="registrarTarjeta()">Guardar</button>
         </ion-item>
       
       </ion-list>

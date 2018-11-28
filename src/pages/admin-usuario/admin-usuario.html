@@ -1,0 +1,178 @@
+<ion-header>
+    <ion-navbar class="principal">
+     
+  
+      <div class="logo">
+        <img src="assets/imgs/logof.png" alt="">
+      </div>
+  
+      <ion-buttons start>
+        <button ion-button icon-only>
+          <ion-icon name="contact" color="oro"></ion-icon>
+        </button>
+      </ion-buttons>
+
+      
+      
+    </ion-navbar>
+   
+        <ion-segment [(ngModel)]="seccion">
+          <ion-segment-button value="inversion">
+            Inversiones
+          </ion-segment-button>
+          <ion-segment-button value="recarga">
+            Recargas
+          </ion-segment-button>
+          <ion-segment-button value="solicitud">
+              Solicitudes
+          </ion-segment-button>
+          <ion-segment-button value="chat">
+              Chat
+            </ion-segment-button>
+        </ion-segment>
+      
+    
+  </ion-header>
+
+
+<ion-content padding>
+
+  <div *ngIf="seccion == 'inversion'">
+      <div class="center">
+          <h3 style="color: #D4AF37">Agregar Inversión</h3>
+      </div>
+
+      <ion-list no-lines>
+          <ion-item>
+              <ion-label floating>Nombre</ion-label>
+              <ion-input
+                [(ngModel)]="inversion.nombre"
+                type="text"
+                required
+              >
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Descripción</ion-label>
+                <ion-input
+                  [(ngModel)]="inversion.descripcion"
+                  type="text"
+                  required
+                >
+                </ion-input>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label floating>Cantidad de Inversión</ion-label>
+                  <ion-input
+                    [(ngModel)]="inversion.inversion"
+                    type="number"
+                    required
+                  >
+                  </ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label floating>Fecha de Inversión</ion-label>
+                    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="inversion.fecha"></ion-datetime>
+                  </ion-item>
+
+                  <ion-item>
+                    <button ion-button (click)="agregarInversion()">
+                        Agregar
+                    </button>
+                  </ion-item>
+      </ion-list>
+
+      <ion-list class="lista-dark" no-lines>
+        
+            <button ion-item *ngFor="let inversion of inversiones | async"  (click)="abrirOpciones(inversion.key)">
+              <ion-icon name="logo-euro" color="oro" start></ion-icon>
+              {{inversion.nombre}}
+              <span class="mini" item-end>{{inversion.inversion}}€</span>
+            </button>
+            
+      </ion-list>
+  </div>
+
+  <div *ngIf="seccion == 'recarga'">
+      <div class="center">
+          <h3 style="color: #D4AF37">Agregar Recarga</h3>
+      </div>
+
+      <ion-list no-lines>
+          <ion-item>
+              <ion-label floating>Cantidad</ion-label>
+              <ion-input type="number" step="0.1" min="0" [(ngModel)]="movimiento.cantidad"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Concepto</ion-label>
+                <ion-input type="text" [(ngModel)]="movimiento.concepto"></ion-input>
+              </ion-item>
+    
+            <ion-item>
+               <button ion-button color="primary" (click)="agregarAbono()">Agregar</button>
+            </ion-item>
+    
+      </ion-list>
+
+      <ion-list no-lines>
+          <button ion-item *ngFor="let movimiento of movimientos | async">
+              <span style="color:rgb(0, 255, 0)" *ngIf=" movimiento.tipo == 'abono' ">   <ion-icon name="add-circle"></ion-icon> {{movimiento.cantidad}}€</span>
+    
+              <span style="color:rgb(255, 0, 0)"  *ngIf=" movimiento.tipo == 'retiro' ">   <ion-icon name="remove-circle"></ion-icon> {{movimiento.cantidad}}€</span>
+    
+               {{movimiento.concepto}} <span style="font-size:small;float: right" end>{{movimiento.estatus}}
+        </span>    </button>
+        
+      
+      </ion-list>
+
+  </div>
+
+  <div *ngIf="seccion == 'solicitud'">
+
+      <div class="center">
+          <h3 style="color: #D4AF37">Cuenta Asociada</h3>
+          <h6>{{cuenta.numero}}</h6>
+          <h3 style="color: #D4AF37">Titular</h3>
+          <h6>{{cuenta.nombre}}</h6>
+      </div>
+
+      <ion-list no-lines>
+          <button ion-item *ngFor="let solicitud of solicitudes | async" (click)="verificarMovimiento(solicitud.key)">
+              <span style="color:rgb(0, 255, 0)" *ngIf=" solicitud.tipo == 'abono' ">   <ion-icon name="add-circle"></ion-icon> {{solicitud.cantidad}}€</span>
+    
+              <span style="color:rgb(255, 0, 0)"  *ngIf=" solicitud.tipo == 'retiro' ">   <ion-icon name="remove-circle"></ion-icon> {{solicitud.cantidad}}€</span>
+    
+               {{solicitud.concepto}} <span style="font-size:small;float: right" end>{{solicitud.estatus}}
+        </span>    </button>
+      </ion-list>
+
+  </div>
+
+  <div *ngIf="seccion == 'chat'">
+      <ion-card *ngFor="let mensaje of mensajes | async">
+          <ion-card-content>
+              {{mensaje.mensaje}}
+            </ion-card-content>
+      </ion-card>
+  </div>
+
+</ion-content>
+
+<ion-footer *ngIf = "seccion == 'chat'">
+    <ion-toolbar color="primary">
+        <ion-input type="text" [(ngModel)]="mensaje.mensaje" color="secondary"></ion-input>
+
+      <ion-buttons end>
+        <button ion-button icon-end color="royal" (click)="enviarMensaje()">
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+
+

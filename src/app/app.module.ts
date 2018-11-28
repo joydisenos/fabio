@@ -25,6 +25,13 @@ import { InversionesPage } from '../pages/inversiones/inversiones';
 import { DetallesPage } from '../pages/detalles/detalles';
 import { LoginPage } from '../pages/login/login';
 import { RegistroPage } from '../pages/registro/registro';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { AdminPage } from '../pages/admin/admin';
+import { AdminUsuarioPage } from '../pages/admin-usuario/admin-usuario';
+import { ChatPage } from '../pages/chat/chat';
+import { ChatAdminPage } from '../pages/chat-admin/chat-admin';
+import { AdminDetallesPage } from '../pages/admin-detalles/admin-detalles';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 @NgModule({
   declarations: [
@@ -42,7 +49,13 @@ import { RegistroPage } from '../pages/registro/registro';
     InversionesPage,
     DetallesPage,
     LoginPage,
-    RegistroPage
+    RegistroPage,
+    PerfilPage,
+    AdminPage,
+    AdminUsuarioPage,
+    ChatPage,
+    ChatAdminPage,
+    AdminDetallesPage
   ],
   imports: [
     BrowserModule,
@@ -67,11 +80,18 @@ import { RegistroPage } from '../pages/registro/registro';
     InversionesPage,
     DetallesPage,
     LoginPage,
-    RegistroPage
+    RegistroPage,
+    PerfilPage,
+    AdminPage,
+    AdminUsuarioPage,
+    ChatPage,
+    ChatAdminPage,
+    AdminDetallesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    EmailComposer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -15,7 +15,7 @@
       </div>
 
     <ion-buttons start>
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="abrirChat()">
         <ion-icon name="contact" color="oro"></ion-icon>
       </button>
     </ion-buttons>
@@ -28,70 +28,11 @@
 <div>
   <ion-list class="lista-dark" no-lines>
     
-    <button ion-item  >
+    <button ion-item *ngFor="let inversion of inversiones | async"  (click)="abrirDetalles(inversion.key)">
         <ion-icon name="logo-euro" color="oro" start></ion-icon>
-        Compra de Vehículo Ferrari 250 GTO
-        <span class="mini" item-end>4.000€</span>
+        {{inversion.nombre}}
+        <span class="mini" item-end>{{inversion.inversion}}€</span>
       </button>
-      
-    
-      <button ion-item  >
-          <ion-icon name="logo-euro" color="oro" start></ion-icon>
-        Porche Spyder
-        <span class="mini" item-end>4.000€</span>
-      </button>
-      <button ion-item  >
-          <ion-icon name="logo-euro" color="oro" start></ion-icon>
-        Nissan 350z
-        <span class="mini" item-end>4.000€</span>
-      </button>
-      
-      <button ion-item  >
-        <ion-icon name="logo-euro" color="oro" start></ion-icon>
-        Propiedad 2 Plantas
-        <span class="mini" item-end>4.000€</span>
-      </button>
-     
-      <button ion-item  >
-          <ion-icon name="logo-euro" color="oro" start></ion-icon>
-        5000 mts2 Terreno
-        <span class="mini" item-end>4.000€</span>
-      </button>
-
-      <button ion-item  >
-          <ion-icon name="logo-euro" color="oro" start></ion-icon>
-        Edificio de 5 pisos
-        <span class="mini" item-end>4.000€</span>
-      </button>
-
-      <button ion-item  >
-          <ion-icon name="logo-euro" color="oro" start></ion-icon>
-        Conjunto Residencial Pino
-        <span class="mini" item-end>4.000€</span>
-      </button>
-     
-  
-        
-        <button ion-item  >
-            <ion-icon name="logo-euro" color="oro" start></ion-icon>
-            Compra de Vehículo Ferrari 250 
-            <span class="mini" item-end>4.000€</span>
-          </button>
-          <button ion-item  >
-              <ion-icon name="logo-euro" color="oro" start></ion-icon>
-            Compra de Acciones Lays
-            <span class="mini" item-end>4.000€</span>
-          </button>
-          <button ion-item  >
-              <ion-icon name="logo-euro" color="oro" start></ion-icon>
-            Compra de Franquicia Arturo's
-            <span class="mini" item-end>4.000€</span>
-          </button>
-          <button ion-item  >
-              <ion-icon name="logo-euro" color="oro" start></ion-icon>
-            Compra Cuadros Coleccionables
-            <span class="mini" item-end>4.000€</span>
-          </button>
           
       </ion-list>
   </div>

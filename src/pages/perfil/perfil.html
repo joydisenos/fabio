@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar class="principal">
+      <button ion-button menuToggle>
+        <ion-icon name="menu" color="oro"></ion-icon>
+      </button>
+  
+      <div class="logo">
+        <img src="assets/imgs/logof.png" alt="">
+      </div>
+  
+      <ion-buttons start>
+        <button ion-button icon-only (click)="abrirChat()">
+          <ion-icon name="contact" color="oro"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+
+    <ion-list>
+
+        <ion-item>
+            <ion-label floating>Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="perfil.nombre" disabled></ion-input>
+          </ion-item>
+
+          <ion-item>
+              <ion-label floating>Apellido</ion-label>
+              <ion-input type="text" [(ngModel)]="perfil.apellido" disabled></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Fecha de Nacimiento</ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="perfil.fecha"></ion-datetime>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label floating>Domicilio</ion-label>
+                  <ion-input type="text" [(ngModel)]="perfil.domicilio"></ion-input>
+                </ion-item>
+      
+      </ion-list>
+
+        <button color="primary" ion-button (click)="actualizarPerfil()">Actualizar</button>
+
+</ion-content>

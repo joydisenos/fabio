@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar class="principal">
+      
+  
+      <div class="logo">
+        <img src="assets/imgs/logof.png" alt="">
+      </div>
+  
+      <ion-buttons start>
+        <button ion-button icon-only>
+          <ion-icon name="logout" color="oro"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <button ion-item *ngFor="let usuario of usuarios | async" (click)="abrirUsuario(usuario.key)">
+        <ion-icon name="contact" item-start color="oro" item-star></ion-icon>
+        {{usuario.perfil.nombre}} {{usuario.perfil.apellido}}
+    </button>
+    </ion-list>
+
+</ion-content>

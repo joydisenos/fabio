@@ -9,6 +9,9 @@ import { MovimientosPage } from '../pages/movimientos/movimientos';
 import { TarjetaPage } from '../pages/tarjeta/tarjeta';
 import { LoginPage } from '../pages/login/login';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { DepositoPage } from '../pages/deposito/deposito';
+import { AngularFireObject, AngularFireDatabase } from '@angular/fire/database';
 
 
 @Component({
@@ -21,19 +24,38 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
+  perfilRef:AngularFireObject<any>;
+  perfil = {};
+
   constructor(private afAuth: AngularFireAuth,
               public platform: Platform,
               public statusBar: StatusBar, 
-              public splashScreen: SplashScreen) {
+              public splashScreen: SplashScreen,
+              public afDatabase: AngularFireDatabase) {
+
     this.initializeApp();
-    // used for an example of ngFor and navigation
+
+    this.afAuth.authState.subscribe(data => {
+      if(data && data.email && data.uid)
+      {
+        this.perfilRef = this.afDatabase.object('usuarios/' + data.uid + '/perfil');
+        this.perfil = this.perfilRef.snapshotChanges().subscribe(perfil => {
+          this.perfil = perfil.payload.val();
+        });
+    
+      }
+    });
+
     this.pages = [
 
       { title: 'Inicio', component: HomePage },
+      { title: 'Perfil', component: PerfilPage },
       { title: 'Inversiones', component: InversionesPage },
+      { title: 'Retiro', component: DepositoPage },
       { title: 'Movimientos', component: MovimientosPage },
       { title: 'Asociar Cuenta', component: TarjetaPage }
     ];
+
 
   }
 
@@ -60,4 +82,5 @@ export class MyApp {
       this.nav.setRoot(LoginPage);
     });
   }
+
 }

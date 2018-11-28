@@ -9,7 +9,7 @@
     </div>
 
     <ion-buttons start>
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="abrirChat()">
         <ion-icon name="contact" color="oro"></ion-icon>
       </button>
     </ion-buttons>
@@ -23,7 +23,7 @@
       
 
        <h1>
-        1000€
+        {{disponible}}€
        </h1>
        <div class="mini">
          Balance total
@@ -32,21 +32,21 @@
   <div id="container" style="display: block;"	></div>
 
   <ion-list no-lines>
-    <button ion-item  >
+    <button ion-item  *ngFor="let inversion of inversiones | async" (click)="abrirDetalles(inversion.key)">
 
       <ion-row>
         <ion-col col-2>
  
-              <ion-icon name="car" item-start color="oro"></ion-icon>
+              <ion-icon name="bulb" item-start color="oro"></ion-icon>
          
         </ion-col>
 
         <ion-col >
-            Compra Nissan 350z
+            {{inversion.nombre}}
             <br>
 
       <div class="mini">
-        4.000€
+        {{inversion.inversion}}€
       </div>
         </ion-col>
       </ion-row>
@@ -55,7 +55,7 @@
      
 
       <span item-end class="mini">
-        14-11-2018
+        {{inversion.fecha}}
       </span>
 
       
@@ -64,243 +64,12 @@
     </button>
 
 
-    <button ion-item  >
-
-        <ion-row>
-          <ion-col col-2>
-   
-                <ion-icon name="car" item-start color="oro"></ion-icon>
-           
-          </ion-col>
   
-          <ion-col >
-              Compra Nissan 350z
-              <br>
-  
-        <div class="mini">
-          4.000€
-        </div>
-          </ion-col>
-        </ion-row>
-        
-        
-       
-  
-        <span item-end class="mini">
-          14-11-2018
-        </span>
-  
-        
-  
-        
-      </button>
-
-
-
-      <button ion-item  >
-
-          <ion-row>
-            <ion-col col-2>
-     
-                  <ion-icon name="car" item-start color="oro"></ion-icon>
-             
-            </ion-col>
-    
-            <ion-col >
-                Compra Yate
-                <br>
-    
-          <div class="mini">
-            12.000€
-          </div>
-            </ion-col>
-          </ion-row>
-          
-          
-         
-    
-          <span item-end class="mini">
-            14-11-2018
-          </span>
-    
-          
-    
-          
-        </button>
-
-
-
-
-        <button ion-item  >
-
-            <ion-row>
-              <ion-col col-2>
-       
-                    <ion-icon name="bulb" item-start color="oro"></ion-icon>
-               
-              </ion-col>
-      
-              <ion-col >
-                  Accciones Lay's
-                  <br>
-      
-            <div class="mini">
-              9.000€
-            </div>
-              </ion-col>
-            </ion-row>
-            
-            
-           
-      
-            <span item-end class="mini">
-              14-11-2018
-            </span>
-      
-            
-      
-            
-          </button>
-
-
-
-
-          <button ion-item  >
-
-              <ion-row>
-                <ion-col col-2>
-         
-                      <ion-icon name="alert" item-start color="oro"></ion-icon>
-                 
-                </ion-col>
-        
-                <ion-col >
-                    Compra Casa de 2 Plantas
-                    <br>
-        
-              <div class="mini">
-                123.000€
-              </div>
-                </ion-col>
-              </ion-row>
-              
-              
-             
-        
-              <span item-end class="mini">
-                14-11-2018
-              </span>
-        
-              
-        
-              
-            </button>
-
-
-
-
-            <button ion-item  >
-
-                <ion-row>
-                  <ion-col col-2>
-           
-                        <ion-icon name="car" item-start color="oro"></ion-icon>
-                   
-                  </ion-col>
-          
-                  <ion-col >
-                      Compra Ferrari
-                      <br>
-          
-                <div class="mini">
-                  4.000€
-                </div>
-                  </ion-col>
-                </ion-row>
-                
-                
-               
-          
-                <span item-end class="mini">
-                  14-11-2018
-                </span>
-          
-                
-          
-                
-              </button>
-
-
-
-
-              <button ion-item  >
-
-                  <ion-row>
-                    <ion-col col-2>
-             
-                          <ion-icon name="bulb" item-start color="oro"></ion-icon>
-                     
-                    </ion-col>
-            
-                    <ion-col >
-                        Compra Local
-                        <br>
-            
-                  <div class="mini">
-                    4.000€
-                  </div>
-                    </ion-col>
-                  </ion-row>
-                  
-                  
-                 
-            
-                  <span item-end class="mini">
-                    14-11-2018
-                  </span>
-            
-                  
-            
-                  
-                </button>
-
-
-
-                <button ion-item  >
-
-                    <ion-row>
-                      <ion-col col-2>
-               
-                            <ion-icon name="alert" item-start color="oro"></ion-icon>
-                       
-                      </ion-col>
-              
-                      <ion-col >
-                            Compra Terreno 200 mts2
-                          <br>
-              
-                    <div class="mini">
-                      45.000€
-                    </div>
-                      </ion-col>
-                    </ion-row>
-                    
-                    
-                   
-              
-                    <span item-end class="mini">
-                      1-11-2018
-                    </span>
-              
-                    
-              
-                    
-                  </button>
     
 
 
   </ion-list>
   
-
+<input type="hidden" class="abonos" value="{{movimiento.cantidad}}" *ngFor="let movimiento of movimientos | async">
 
 </ion-content>

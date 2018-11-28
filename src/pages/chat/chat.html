@@ -1,0 +1,32 @@
+<ion-header>
+
+    <ion-navbar class="principal">
+        <div class="logo">
+            <img src="assets/imgs/logof.png" alt="">
+          </div>
+    </ion-navbar>
+  
+  </ion-header>
+
+
+<ion-content padding>
+
+  <ion-card *ngFor="let mensaje of mensajes | async">
+      <ion-card-content>
+          {{mensaje.mensaje}}
+        </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color="primary">
+        <ion-input type="text" [(ngModel)]="mensaje.mensaje" color="secondary"></ion-input>
+
+      <ion-buttons end>
+        <button ion-button icon-end color="royal" (click)="enviarMensaje()">
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>

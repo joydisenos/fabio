@@ -27,9 +27,6 @@ export class LoginPage {
     public alertCtrl : AlertController ) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
 
   registroPage()
   {
@@ -54,18 +51,7 @@ export class LoginPage {
      }
 
 signin(){
-  this.afAuth.auth.createUserWithEmailAndPassword(this.user.email,this.user.password)
-  .then((user) => {
-    this.navCtrl.setRoot(HomePage);
-  })
-  .catch(err=>{
-    let alert = this.alertCtrl.create({
-      title: 'Error',
-      subTitle: err.message,
-      buttons: ['Aceptar']
-    });
-    alert.present();
-  })
+  this.navCtrl.push(RegistroPage);
 
 }
 
