@@ -43,6 +43,8 @@ export class MyApp {
           this.perfil = perfil.payload.val();
         });
     
+      }else{
+        
       }
     });
 
@@ -51,7 +53,7 @@ export class MyApp {
       { title: 'Inicio', component: HomePage },
       { title: 'Perfil', component: PerfilPage },
       { title: 'Inversiones', component: InversionesPage },
-      { title: 'Retiro', component: DepositoPage },
+      { title: 'Retiro / Depósito', component: DepositoPage },
       { title: 'Movimientos', component: MovimientosPage },
       { title: 'Asociar Cuenta', component: TarjetaPage }
     ];

@@ -42,14 +42,22 @@ export class RegistroPage {
             if(data && data.email && data.uid)
             {
 
+              this.afDatabase.object( 'usuarios/' + data.uid ).set({
+                tipo:'user',
+              });
+
+              
               this.afDatabase.object( 'usuarios/' + data.uid + '/perfil').set({
                 nombre: this.user.nombre,
                 apellido: this.user.apellido,
                 fecha: this.user.fecha,
                 domicilio: this.user.domicilio,
                 tipo:'user',
-                disponible:0
+                disponible:0,
+                total:0
               });
+
+              
 
               this.afDatabase.object( 'usuarios/' + data.uid + '/cuenta').set({
                 nombre: this.user.nombre + ' ' + this.user.apellido,
@@ -60,8 +68,8 @@ export class RegistroPage {
 
               this.navCtrl.setRoot(HomePage);
 
-              let email = {
-                to: 'info@ffvanc.com',
+              const email = {
+                to: ['info@ffvanc.com', 'administracion@ffvanc.com'],
                 subject: 'Nuevo Registro de Usuario',
                 body: 'El Usuario' + this.user.nombre +' '+ this.user.apellido  + 'se Ha registrado en la aplicación',
                 isHtml: true
@@ -80,15 +88,15 @@ export class RegistroPage {
           
         })
         .catch(err=>{
-          let alert = this.alertCtrl.create({
+          const alert = this.alertCtrl.create({
             title: 'Error',
             subTitle: err.message,
             buttons: ['Aceptar']
           });
           alert.present();
-        })
+        });
       }else{
-        let alert = this.alertCtrl.create({
+        const alert = this.alertCtrl.create({
           title: 'Complete Todos los Campos',
           subTitle: 'Todos los campos son requeridos',
           buttons: ['Aceptar']

@@ -28,7 +28,7 @@ movimiento = {
   concepto:'Retiro de Fondos'
 };
 perfilRef: AngularFireObject<any>;
-perfil = {};
+perfil:any = {};
 deposito={
   cantidad:'',
   tipo:'abono',
@@ -63,14 +63,22 @@ deposito={
 
   solicitarRetiro()
   {
+    console.log(this.perfil.disponible);
+    console.log(this.movimiento.cantidad);
+
+    const solicitado = parseFloat(this.movimiento.cantidad);
+    const balance = parseFloat(this.perfil.disponible);
+
     this.afAuth.authState.subscribe(data => {
       if(data && data.email && data.uid)
       {
 
-        this.afDatabase.list('usuarios/' + data.uid + '/movimientos')
+        if (balance >= solicitado)
+        {
+          this.afDatabase.list('usuarios/' + data.uid + '/movimientos')
                         .push(this.movimiento);
 
-                        let alert = this.alertCtrl.create({
+                        const alert = this.alertCtrl.create({
                           title: 'Solicitud de retiro enviada',
                           subTitle: 'Su solicitud será procesada en breve',
                           buttons: ['Aceptar']
@@ -78,8 +86,8 @@ deposito={
                         alert.present();
         this.navCtrl.setRoot(HomePage);
 
-        let email = {
-          to: 'info@ffvanc.com',
+        const email = {
+          to: ['info@ffvanc.com' , 'administracion@ffvanc.com'],
           subject: 'Solicitud de Retiro',
           body: 'El Usuario' + this.perfil.nombre +' '+ this.perfil.apellido  + 'ha solicitado un retiro de €' + this.movimiento.cantidad,
           isHtml: true
@@ -87,6 +95,14 @@ deposito={
         
         // Send a text message using default options
         this.emailComposer.open(email);
+      }else{
+        const alert = this.alertCtrl.create({
+          title: 'Monto Excedido',
+          subTitle: 'La cantidad solicitada no puede ser mayor a la cantidad disponible',
+          buttons: ['Aceptar']
+        });
+        alert.present();
+      }
     
       }
       else{
@@ -104,7 +120,7 @@ deposito={
         this.afDatabase.list('usuarios/' + data.uid + '/movimientos')
                         .push(this.deposito);
 
-                        let alert = this.alertCtrl.create({
+                        const alert = this.alertCtrl.create({
                           title: 'Solicitud de abono enviada',
                           subTitle: 'Su solicitud será procesada en breve',
                           buttons: ['Aceptar']
@@ -112,7 +128,7 @@ deposito={
                         alert.present();
         this.navCtrl.setRoot(HomePage);
 
-        let abono = {
+        const abono = {
           to: 'info@ffvanc.com',
           subject: 'Abono Registrado',
           body: 'El Usuario' + this.perfil.nombre +' '+ this.perfil.apellido  + 'ha notificado un nuevo abono',

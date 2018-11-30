@@ -27,12 +27,14 @@
 <ion-content padding class="fondo-dark">
 <div>
   <ion-list class="lista-dark" no-lines>
-    
-    <button ion-item *ngFor="let inversion of inversiones | async"  (click)="abrirDetalles(inversion.key)">
-        <ion-icon name="logo-euro" color="oro" start></ion-icon>
-        {{inversion.nombre}}
-        <span class="mini" item-end>{{inversion.inversion}}€</span>
-      </button>
+
+      <button ion-item *ngFor="let inversion of inversiones | async" (click)="abrirDetalles(inversion.key)">
+          <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> {{inversion.inversion}}€</span>
+  
+           {{inversion.nombre}} <span style="font-size:small;float: right" end>{{inversion.fecha}}
+    </span>    
+  
+  </button>
           
       </ion-list>
   </div>

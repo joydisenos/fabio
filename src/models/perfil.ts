@@ -5,4 +5,5 @@ export interface Perfil {
     fecha: string;
     tipo: string;
     disponible:number;
+    total:number;
 }

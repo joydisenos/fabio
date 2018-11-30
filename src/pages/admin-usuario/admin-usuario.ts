@@ -17,7 +17,7 @@ export class AdminUsuarioPage {
 
   key:string;
   perfilRef:AngularFireObject<any>;
-  perfil = { };
+  perfil:any = { };
   seccion = 'inversion';
   inversionesRef: AngularFireList<any>;
   inversiones: Observable<any>;
@@ -30,8 +30,9 @@ export class AdminUsuarioPage {
   perfil2 : AngularFireObject<Perfil>;
   perfilData : Observable<Perfil>;
   disponible:any;
-
-  inversion = {
+  total:any;
+  movimientoref:any ={};
+  inversion:any = {
     nombre:'',
     descripcion:'',
     inversion:'',
@@ -43,14 +44,14 @@ export class AdminUsuarioPage {
     inversionkey : ''
   };
 
-  movimiento = {
+  movimiento:any = {
     cantidad:'',
     tipo:'',
     estatus:'',
     concepto:''
   };
 
-  mensaje = {
+  mensaje:any = {
     mensaje:'',
     user:'admin'
   };
@@ -85,7 +86,8 @@ export class AdminUsuarioPage {
                               )
                           );
 
-        this.movimientosRef = this.afDatabase.list('usuarios/' + this.key + '/movimientos');
+        this.movimientosRef = this.afDatabase.list('usuarios/' + this.key + '/movimientos',
+        ref => ref.orderByChild('estatus').equalTo('aprobado'));
         this.movimientos = this.movimientosRef
           .snapshotChanges()  
           .pipe(
@@ -123,6 +125,7 @@ export class AdminUsuarioPage {
         this.perfilData = this.perfil2.valueChanges();
         this.perfilData.subscribe(user => {
             this.disponible = user.disponible;
+            this.total = user.total;
         } );
 
         this.cuentaRef = this.afDatabase.object('usuarios/' + this.key + '/cuenta');
@@ -135,6 +138,20 @@ export class AdminUsuarioPage {
   {
     this.afDatabase.list('usuarios/' + this.key + '/inversiones')
                     .push(this.inversion);
+    
+    const resta = (parseFloat(this.disponible) - parseFloat(this.inversion.inversion));
+
+    this.afDatabase.object('usuarios/'+this.key+'/perfil')
+                                .update({
+                                  disponible: resta
+                                });
+
+    this.inversion = {
+      nombre:'',
+      descripcion:'',
+      inversion:'',
+      fecha:''
+    }
   }
 
   abrirDetalles(key)
@@ -159,12 +176,13 @@ export class AdminUsuarioPage {
           handler: () => {
             this.afDatabase.object(
               'usuarios/' 
-              + this.key 
-              + '/inversiones/' 
-              + key).remove();
+              + this.key +
+              '/inversiones/'
+              + key
+             ).remove();
 
 
-              let alert = this.alertCtrl.create({
+              const alert = this.alertCtrl.create({
                 title: 'Eliminado',
                 subTitle: 'La inversión fué Eliminada con éxito',
                 buttons: ['Aceptar']
@@ -195,14 +213,13 @@ export class AdminUsuarioPage {
                           + '/movimientos')
                   .push(this.movimiento);
 
-   
-console.log(this.disponible);
-console.log(this.movimiento.cantidad);
     const suma = (parseFloat(this.disponible) + parseFloat(this.movimiento.cantidad));
+    const sumatotal = (parseFloat(this.total) + parseFloat(this.movimiento.cantidad));
 
     this.afDatabase.object('usuarios/'+this.key+'/perfil')
                                 .update({
-                                  disponible: suma 
+                                  disponible: suma,
+                                  total: sumatotal
                                 });
 
 
@@ -226,9 +243,6 @@ console.log(this.movimiento.cantidad);
   verificarMovimiento(movimientokey)
   {
 
-    
-
-
     const actionSheet = this.actionSheet.create({
       title: 'Verificar Transacción',
       buttons: [
@@ -236,35 +250,39 @@ console.log(this.movimiento.cantidad);
           text: 'Aprobar',
           handler: () => {
             
-            const movimientoref = this.afDatabase.object('usuarios/'+this.key+'/movimientos/' + movimientokey);
-            movimientoref
+            this.movimientoref = this.afDatabase.object('usuarios/'+this.key+'/movimientos/' + movimientokey);
+            this.movimientoref
             .valueChanges().subscribe( movimiento => {
               
               if(movimiento.tipo == 'abono')
               {
                 const monto1 = parseFloat(this.disponible) + parseFloat(movimiento.cantidad);
+                const monto3 = parseFloat(this.total) + parseFloat(movimiento.cantidad);
                 console.log(monto1);
                 console.log(parseFloat(this.disponible));
                 console.log(parseFloat(movimiento.cantidad));
-                this.afDatabase.object('usuarios/'+this.key+'/perfil')
+                this.afDatabase.object('usuarios/' + this.key +'/perfil')
                                 .update({
-                                  disponible: monto1 
+                                  disponible: monto1,
+                                  total: monto3 
                                 });
               }
               else if(movimiento.tipo == 'retiro')
               {
                 const monto2 = parseFloat(this.disponible) - parseFloat(movimiento.cantidad);
-                console.log(monto1);
+                const monto4 = parseFloat(this.total) - parseFloat(movimiento.cantidad);
+              
                 console.log(parseFloat(this.disponible));
                 console.log(parseFloat(movimiento.cantidad));
-                this.afDatabase.object('usuarios/'+this.key+'/perfil')
+                this.afDatabase.object('usuarios/'+ this.key + '/perfil')
                                 .update({
-                                  disponible: monto2
+                                  disponible: monto2,
+                                  total: monto4
                                 });
               }
             });
 
-            movimientoref.update({
+            this.movimientoref.update({
               estatus:'aprobado'
             });
           }

@@ -86,12 +86,14 @@
       </ion-list>
 
       <ion-list class="lista-dark" no-lines>
+
+            <button ion-item *ngFor="let inversion of inversiones | async" (click)="abrirOpciones(inversion.key)">
+                <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> {{inversion.inversion}}€</span>
         
-            <button ion-item *ngFor="let inversion of inversiones | async"  (click)="abrirOpciones(inversion.key)">
-              <ion-icon name="logo-euro" color="oro" start></ion-icon>
-              {{inversion.nombre}}
-              <span class="mini" item-end>{{inversion.inversion}}€</span>
-            </button>
+                 {{inversion.nombre}} <span style="font-size:small;float: right" end>{{inversion.fecha}}
+          </span>    
+        
+        </button>
             
       </ion-list>
   </div>
@@ -139,6 +141,10 @@
           <h6>{{cuenta.numero}}</h6>
           <h3 style="color: #D4AF37">Titular</h3>
           <h6>{{cuenta.nombre}}</h6>
+          <h5 style="color: #D4AF37">Total</h5>
+          <h6>{{perfil.total}}</h6>
+          <h3 style="color: #D4AF37">Disponible</h3>
+          <h6>{{perfil.disponible}}</h6>
       </div>
 
       <ion-list no-lines>
@@ -165,7 +171,7 @@
 
 <ion-footer *ngIf = "seccion == 'chat'">
     <ion-toolbar color="primary">
-        <ion-input type="text" [(ngModel)]="mensaje.mensaje" color="secondary"></ion-input>
+        <ion-input type="text" style="color:#fff;" [(ngModel)]="mensaje.mensaje" color="secondary"></ion-input>
 
       <ion-buttons end>
         <button ion-button icon-end color="royal" (click)="enviarMensaje()">

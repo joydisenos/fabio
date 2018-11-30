@@ -29,8 +29,14 @@
       
 
         <h1>
-         {{perfil.disponible}}€
+            <span style="color:#000">{{perfil.disponible | number: '1.2-2'}}</span>€
         </h1>
+        <div class="mini">
+          Balance disponible
+        </div>
+        <h3>
+            <span style="color:#000">{{perfil.total | number: '1.2-2'}}</span>€
+        </h3>
         <div class="mini">
           Balance total
         </div>

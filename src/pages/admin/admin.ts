@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -26,9 +26,12 @@ export class AdminPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public afDatabase: AngularFireDatabase,
-              public afAuth: AngularFireAuth) {
+              public actionSheet: ActionSheetController,
+              public afAuth: AngularFireAuth,
+              public alertCtrl: AlertController) {
 
-    this.usuariosRef = this.afDatabase.list('usuarios');
+    this.usuariosRef = this.afDatabase.list('usuarios',
+    ref => ref.orderByChild('tipo').equalTo('user'));
     this.usuarios = this.usuariosRef
           .snapshotChanges()  
           .pipe(
@@ -44,7 +47,47 @@ export class AdminPage {
 
   abrirUsuario(key)
   {
+
     this.navCtrl.push(AdminUsuarioPage , {key:key});
+  }
+
+  abrirOpciones(key)
+  {
+    const actionSheet = this.actionSheet.create({
+      title: 'Acciones',
+      buttons: [
+        {
+          text: 'Ver Detalles',
+          handler: () => {
+            this.abrirUsuario(key);
+          }
+        },{
+          text: 'Eliminar Usuario',
+          handler: () => {
+            this.afDatabase.object(
+              'usuarios/' 
+              + key).update({
+                tipo:'eliminado'
+              });
+
+
+              const alert = this.alertCtrl.create({
+                title: 'Usuario Eliminado',
+                subTitle: 'El usuario fué eliminado con éxito',
+                buttons: ['Aceptar']
+              });
+              alert.present();
+          }
+        },{
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+           
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
 }

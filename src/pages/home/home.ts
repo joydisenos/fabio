@@ -9,10 +9,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase, AngularFireObject, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { Perfil } from '../../models/perfil';
-import { AdminPage } from '../admin/admin';
 import { LoginPage } from '../login/login';
 import { map } from 'rxjs/operators';
 import { ChatPage } from '../chat/chat';
+import { AdminPage } from '../admin/admin';
 
 @Component({
   selector: 'page-home',
@@ -26,13 +26,22 @@ export class HomePage {
   tab4Root = InversionesPage;
   perfil : AngularFireObject<Perfil>;
   perfilData : Observable<Perfil>;
+  movimiento : AngularFireObject<any>;
+  movimientoRef : Observable<any>;
   inversionesRef: AngularFireList<any>;
   inversiones: Observable<any>;
   disponible:any;
+  total:any;
   movimientosRef: AngularFireList<any>;
   movimientos = {};
+  movimientos2Ref: AngularFireList<any>;
+  movimientos2 = {};
   abonos:any;
-  arreglo1 = [];
+  abonos2:any;
+  arreglo1 :Array<number> = [];
+  arreglo2 :Array<number> = [];
+  numero1 = '';
+  numero2 = '';
 
   constructor(public navCtrl: NavController,
               public afAuth: AngularFireAuth,
@@ -44,11 +53,13 @@ export class HomePage {
         this.perfil = this.afDatabase.object('usuarios/' + data.uid + '/perfil');
         this.perfilData = this.perfil.valueChanges();
         this.perfilData.subscribe(user => {
-            this.disponible = user.disponible;
           if(user.tipo == 'admin')
           {
             this.navCtrl.setRoot(AdminPage);
           }
+            this.disponible = user.disponible;
+            this.total = user.total;
+
         } );
 
         this.inversionesRef = this.afDatabase.list('usuarios/' + data.uid + '/inversiones');
@@ -63,23 +74,50 @@ export class HomePage {
               );
 
 
-        this.movimientosRef = this.afDatabase.list('usuarios/' + data.uid + '/movimientos/');
-        this.movimientos = this.movimientosRef.valueChanges();
-
+        this.movimientosRef = this.afDatabase.list('usuarios/' + data.uid + '/movimientos/' , 
+        ref => ref.orderByChild('tipo').equalTo('abono'));
+        this.movimientos = this.movimientosRef.snapshotChanges()
+        .pipe(
+          map(movimientos => 
+            movimientos.map(movimiento => ({ 
+              key: movimiento.key, 
+              ...movimiento.payload.val() }))
+          )
+      );
         this.abonos = this.movimientos;
 
         this.abonos.forEach(abono => {
           
-          abono.forEach(item => {
-              this.arreglo1.push(parseFloat(item.cantidad));
-          });
+              abono.forEach((item , key) => {
+                  
+                  this.arreglo1[key] = parseFloat(item.cantidad);
+                  
+              });
           
         });
 
-        
 
-          console.log(this.arreglo1);
+        this.movimientos2Ref = this.afDatabase.list('usuarios/' + data.uid + '/movimientos/',
+        ref => ref.orderByChild('tipo').equalTo('retiro'));
+        this.movimientos2 = this.movimientos2Ref.snapshotChanges()
+        .pipe(
+          map(movimientos => 
+            movimientos.map(movimiento => ({ 
+              key: movimiento.key, 
+              ...movimiento.payload.val() }))
+          )
+      );
+        this.abonos2 = this.movimientos2;
+
+        this.abonos2.forEach(abono => {
           
+              abono.forEach((item , key) => {
+                  
+                  this.arreglo2[key] = parseFloat(item.cantidad);
+                  
+              });
+          
+        });
 
       }   
       else{
@@ -90,11 +128,9 @@ export class HomePage {
   }
 
 
-
   ionViewDidEnter() {
   
-
-    var myChart = HighCharts.chart('container', {
+    let myChart = HighCharts.chart('grafico', {
       chart: {
         type: 'spline',
         height: '200px'
@@ -110,24 +146,18 @@ export class HomePage {
       },
       series: [{
         name: 'Ingresos',
-        data: [Math.floor((Math.random() * 500) + 1),
-          Math.floor((Math.random() * 500) + 1),
-          Math.floor((Math.random() * 500) + 1),
-          Math.floor((Math.random() * 500) + 1),
-          Math.floor((Math.random() * 500) + 1)] ,
+        data : this.arreglo1 ,
         color: "#D4AF37"
       },
       {
         name: 'Gastos',
-        data: [Math.floor((Math.random() * 500) + 1),
-          Math.floor((Math.random() * 500) + 1),
-          Math.floor((Math.random() * 500) + 1),
-          Math.floor((Math.random() * 500) + 1),
-          Math.floor((Math.random() * 500) + 1)],
+        data: this.arreglo2 ,
         color: "#000000"
       },
     ]
     });
+
+    myChart;
     
   }
 

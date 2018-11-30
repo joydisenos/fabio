@@ -10,6 +10,7 @@
 
     <ion-buttons start>
       <button ion-button icon-only (click)="abrirChat()">
+          <span class="mini">soporte</span>
         <ion-icon name="contact" color="oro"></ion-icon>
       </button>
     </ion-buttons>
@@ -23,52 +24,63 @@
       
 
        <h1>
-        {{disponible}}€
+        <span style="color:#000">{{disponible | number: '1.2-2'}}</span>€
        </h1>
        <div class="mini">
-         Balance total
+         Balance Disponible
        </div>
+
+       <h2>
+          <span style="color:#000">{{total | number: '1.2-2'}}</span>€
+         </h2>
+         <div class="mini">
+           Balance Total
+         </div>
   </ion-card>
-  <div id="container" style="display: block;"	></div>
 
-  <ion-list no-lines>
-    <button ion-item  *ngFor="let inversion of inversiones | async" (click)="abrirDetalles(inversion.key)">
-
-      <ion-row>
-        <ion-col col-2>
- 
-              <ion-icon name="bulb" item-start color="oro"></ion-icon>
-         
-        </ion-col>
-
-        <ion-col >
-            {{inversion.nombre}}
-            <br>
-
-      <div class="mini">
-        {{inversion.inversion}}€
-      </div>
-        </ion-col>
-      </ion-row>
-      
-      
-     
-
-      <span item-end class="mini">
-        {{inversion.fecha}}
-      </span>
-
-      
-
-      
-    </button>
+  <div id="grafico" style="display: block !important;"	></div>
 
 
+  <ion-list padding no-lines>
+
+      <ion-item>
+          <span><strong>Inversiones</strong></span>
+        </ion-item>
+
+      <button ion-item *ngFor="let inversion of inversiones | async" (click)="abrirDetalles(inversion.key)">
+          <span style="color:rgb(0, 255, 0)">   <ion-icon name="add-circle"></ion-icon> {{inversion.inversion}}€</span>
   
-    
+           {{inversion.nombre}} <span style="font-size:small;float: right" end>{{inversion.fecha}}
+    </span>    
+  
+  </button>
+
+     <ion-item>
+       <span><strong>Abonos</strong></span>
+     </ion-item>
+    <ion-item *ngFor="let movimiento of movimientos | async">
+        <span style="color:rgb(0, 255, 0)" *ngIf=" movimiento.tipo == 'abono' ">   <ion-icon name="add-circle"></ion-icon> {{movimiento.cantidad}}€</span>
+
+        <span style="color:rgb(255, 0, 0)"  *ngIf=" movimiento.tipo == 'retiro' ">   <ion-icon name="remove-circle"></ion-icon> {{movimiento.cantidad}}€</span>
+
+         {{movimiento.concepto}} <span style="font-size:small;float: right" end>{{movimiento.estatus}}
+  </span>    </ion-item>
 
 
-  </ion-list>
+  <ion-item>
+    <span><strong>Retiros</strong></span>
+  </ion-item>
+
+<ion-item *ngFor="let movimiento of movimientos2 | async">
+    <span style="color:rgb(0, 255, 0)" *ngIf=" movimiento.tipo == 'abono' ">   <ion-icon name="add-circle"></ion-icon> {{movimiento.cantidad}}€</span>
+
+    <span style="color:rgb(255, 0, 0)"  *ngIf=" movimiento.tipo == 'retiro' ">   <ion-icon name="remove-circle"></ion-icon> {{movimiento.cantidad}}€</span>
+
+     {{movimiento.concepto}} <span style="font-size:small;float: right" end>{{movimiento.estatus}}
+</span>    </ion-item>
+  
+
+</ion-list>
   
 <input type="hidden" class="abonos" value="{{movimiento.cantidad}}" *ngFor="let movimiento of movimientos | async">
 

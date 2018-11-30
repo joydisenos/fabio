@@ -1,7 +1,6 @@
 <ion-header>
     <ion-navbar class="principal">
       
-  
       <div class="logo">
         <img src="assets/imgs/logof.png" alt="">
       </div>
@@ -19,7 +18,7 @@
 <ion-content padding>
 
   <ion-list>
-    <button ion-item *ngFor="let usuario of usuarios | async" (click)="abrirUsuario(usuario.key)">
+    <button ion-item *ngFor="let usuario of usuarios | async" (click)="abrirOpciones(usuario.key)">
         <ion-icon name="contact" item-start color="oro" item-star></ion-icon>
         {{usuario.perfil.nombre}} {{usuario.perfil.apellido}}
     </button>

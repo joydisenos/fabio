@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { LoginPage } from '../login/login';
 import { ChatPage } from '../chat/chat';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the TarjetaPage page.
@@ -53,12 +54,14 @@ export class TarjetaPage {
         this.afDatabase.object('usuarios/' + data.uid + '/cuenta')
                         .set(this.cuenta);
 
-        let alert = this.alertCtrl.create({
+        const alert = this.alertCtrl.create({
           title: 'Cuenta Registrada',
           subTitle: 'Su cuenta fué registrada con éxito',
           buttons: ['Aceptar']
         });
         alert.present();
+
+        this.navCtrl.setRoot(HomePage);
     
       }
       else{

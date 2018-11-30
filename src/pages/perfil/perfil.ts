@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { LoginPage } from '../login/login';
@@ -27,7 +27,8 @@ export class PerfilPage {
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public afAuth: AngularFireAuth,
-              public afDatabase: AngularFireDatabase) {
+              public afDatabase: AngularFireDatabase,
+              public alertCtrl : AlertController) {
 
     this.afAuth.authState.subscribe(data => {
       if(data && data.email && data.uid)
@@ -52,8 +53,16 @@ export class PerfilPage {
     this.afAuth.authState.subscribe(auth =>{
 
       this.afDatabase.object('usuarios/' + auth.uid + '/perfil')
-                      .set(this.perfil)
-                      .then(() => this.navCtrl.setRoot(HomePage));
+                      .set(this.perfil);
+
+                      const alert = this.alertCtrl.create({
+                        title: 'Datos Actualizados',
+                        subTitle: 'Sus datos han sido actualizados con éxito',
+                        buttons: ['Aceptar']
+                      });
+                      alert.present();
+
+                      this.navCtrl.setRoot(HomePage);
 
     })
   }

@@ -42,7 +42,7 @@ export class AdminDetallesPage {
       + '/inversiones/' 
       + this.params.inversionkey).update(this.inversion);
 
-      let alert = this.alertCtrl.create({
+      const alert = this.alertCtrl.create({
         title: 'Actualizada',
         subTitle: 'Inversión Modificada con Éxito',
         buttons: ['Aceptar']
