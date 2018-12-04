@@ -172,7 +172,7 @@ export class AdminUsuarioPage {
             this.abrirDetalles(key);
           }
         },{
-          text: 'eliminar',
+          text: 'Eliminar',
           handler: () => {
             this.afDatabase.object(
               'usuarios/' 

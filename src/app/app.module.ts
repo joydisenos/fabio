@@ -32,6 +32,8 @@ import { ChatPage } from '../pages/chat/chat';
 import { ChatAdminPage } from '../pages/chat-admin/chat-admin';
 import { AdminDetallesPage } from '../pages/admin-detalles/admin-detalles';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { HttpClientModule } from '@angular/common/http';
+import { UserServiceProvider } from '../providers/user-service/user-service';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { EmailComposer } from '@ionic-native/email-composer';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -92,7 +95,9 @@ import { EmailComposer } from '@ionic-native/email-composer';
     StatusBar,
     SplashScreen,
     EmailComposer,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    UserServiceProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserServiceProvider
   ]
 })
 export class AppModule {}

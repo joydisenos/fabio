@@ -38,8 +38,10 @@ export class HomePage {
   movimientos2 = {};
   abonos:any;
   abonos2:any;
-  arreglo1 :Array<number> = [];
-  arreglo2 :Array<number> = [];
+  inversionesList:any;
+  arreglo1 :Array<number> = [0];
+  arreglo2 :Array<number> = [0];
+  arreglo3 :Array<number> = [0];
   numero1 = '';
   numero2 = '';
 
@@ -72,6 +74,18 @@ export class HomePage {
                       ...inversion.payload.val() }))
                   )
               );
+        
+                      this.inversionesList = this.inversiones;
+
+                      this.inversionesList.forEach(inversion => {
+          
+                        inversion.forEach((item , key) => {
+                            
+                            this.arreglo3[key] = parseFloat(item.inversion);
+                            
+                        });
+                    
+                  });
 
 
         this.movimientosRef = this.afDatabase.list('usuarios/' + data.uid + '/movimientos/' , 
@@ -130,7 +144,7 @@ export class HomePage {
 
   ionViewDidEnter() {
   
-    let myChart = HighCharts.chart('grafico', {
+    var myChart = HighCharts.chart('grafico', {
       chart: {
         type: 'spline',
         height: '200px'
@@ -154,10 +168,14 @@ export class HomePage {
         data: this.arreglo2 ,
         color: "#000000"
       },
+      {
+        name: 'Inversiones',
+        data: this.arreglo3,
+        color: "#037000"
+      }
     ]
     });
 
-    myChart;
     
   }
 

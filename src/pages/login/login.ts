@@ -7,6 +7,7 @@ import { AdminPage } from '../admin/admin';
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { Perfil } from '../../models/perfil';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 /**
  * Generated class for the LoginPage page.
@@ -31,10 +32,12 @@ export class LoginPage {
     public navParams: NavParams,
     private afAuth: AngularFireAuth,
     public alertCtrl : AlertController,
-    public afDatabase: AngularFireDatabase ) {
+    public afDatabase: AngularFireDatabase,
+    public userService: UserServiceProvider ) {
+
   }
 
-
+ 
 
   registroPage()
   {
@@ -75,6 +78,7 @@ verificarUsuario()
           this.navCtrl.setRoot(AdminPage);
         }else{
           this.navCtrl.setRoot(HomePage);
+       
         }
       } );
 

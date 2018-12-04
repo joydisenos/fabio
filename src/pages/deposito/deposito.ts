@@ -6,6 +6,7 @@ import { LoginPage } from '../login/login';
 import { HomePage } from '../home/home';
 import { ChatPage } from '../chat/chat';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 /**
  * Generated class for the DepositoPage page.
@@ -41,7 +42,7 @@ deposito={
               public afAuth: AngularFireAuth,
               public afDatabase: AngularFireDatabase,
               public alertCtrl : AlertController,
-              public emailComposer: EmailComposer) {
+              private userService: UserServiceProvider) {
 
                 
 
@@ -86,15 +87,21 @@ deposito={
                         alert.present();
         this.navCtrl.setRoot(HomePage);
 
-        const email = {
-          to: ['info@ffvanc.com' , 'administracion@ffvanc.com'],
-          subject: 'Solicitud de Retiro',
-          body: 'El Usuario' + this.perfil.nombre +' '+ this.perfil.apellido  + 'ha solicitado un retiro de €' + this.movimiento.cantidad,
-          isHtml: true
+        const mail = {
+          
+          asunto: 'Solicitud de Retiro',
+          mensaje: 'El Usuario ' + this.perfil.nombre +' '+ this.perfil.apellido  + ' ha solicitado un retiro de €' + this.movimiento.cantidad
         };
-        
-        // Send a text message using default options
-        this.emailComposer.open(email);
+
+      this.userService.mail(mail).subscribe(
+        (data) => { // Success
+          console.log('mailing');
+        },
+        (error) =>{
+          console.error(error);
+        });
+
+
       }else{
         const alert = this.alertCtrl.create({
           title: 'Monto Excedido',
@@ -128,15 +135,18 @@ deposito={
                         alert.present();
         this.navCtrl.setRoot(HomePage);
 
-        const abono = {
-          to: 'info@ffvanc.com',
-          subject: 'Abono Registrado',
-          body: 'El Usuario' + this.perfil.nombre +' '+ this.perfil.apellido  + 'ha notificado un nuevo abono',
-          isHtml: true
+        const mail = {
+          asunto: 'Abono Registrado',
+          mensaje: 'El Usuario ' + this.perfil.nombre +' '+ this.perfil.apellido  + ' ha notificado un nuevo abono'
         };
         
-        // Send a text message using default options
-        this.emailComposer.open(abono);
+        this.userService.mail(mail).subscribe(
+          (data) => { // Success
+            console.log('mailing');
+          },
+          (error) =>{
+            console.error(error);
+          });
     
       }
       else{

@@ -5,6 +5,7 @@ import { HomePage } from '../home/home';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { LoginPage } from '../login/login';
 import { EmailComposer } from '@ionic-native/email-composer';
+import { UserServiceProvider } from '../../providers/user-service/user-service';
 
 @IonicPage()
 @Component({
@@ -28,8 +29,10 @@ export class RegistroPage {
               public afAuth: AngularFireAuth,
               public afDatabase: AngularFireDatabase,
               public alertCtrl : AlertController,
-              public emailComposer: EmailComposer) {
+              public emailComposer: EmailComposer,
+              private userService : UserServiceProvider) {
   }
+ 
 
   registro()
   {
@@ -68,15 +71,18 @@ export class RegistroPage {
 
               this.navCtrl.setRoot(HomePage);
 
-              const email = {
-                to: ['info@ffvanc.com', 'administracion@ffvanc.com'],
-                subject: 'Nuevo Registro de Usuario',
-                body: 'El Usuario' + this.user.nombre +' '+ this.user.apellido  + 'se Ha registrado en la aplicación',
-                isHtml: true
+              const mail = {
+                  asunto:'Usuario Registrado',
+                  mensaje:'El Usuario ' + this.user.nombre + ' ' + this.user.apellido + 'se ha registrado desde la aplicación'
               };
-              
-              // Send a text message using default options
-              this.emailComposer.open(email);
+
+              this.userService.mail(mail).subscribe(
+                (data) => { // Success
+                  console.log('mailing');
+                },
+                (error) =>{
+                  console.error(error);
+                });
 
           
             }
